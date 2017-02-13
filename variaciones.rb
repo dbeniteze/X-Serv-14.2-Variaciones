@@ -1,6 +1,6 @@
 require 'socket' # Provides TCPServer and TCPSocket classes
 
-server = TCPServer.new(Socket.gethostname, 2345)
+server = TCPServer.new(Socket.gethostname, 1234)
 loop do
 
   socket = server.accept
@@ -11,7 +11,7 @@ loop do
   response = "HTTP/1.1 200 OK\r\n\r\n" +
                     "<html><body><h1>VARIACIONES APP</h1>" +
                     "<h2>Introduzca al final de la url la seleccion </h2>"+
-                    "<h3>Uso:  url:puerto/(introduzca aqui su seleccion) </h3>"+
+                    "<h3>Uso: hostname:1234/(introduzca aqui su seleccion) </h3>"+
                     "<p> 1- Pagina GSYC</p>" +
                     "<p> 2- Pagina ERROR</p>" +
                     "<p> 3- Pagina con imagen</p>" +
@@ -37,7 +37,7 @@ img_response = "HTTP/1.1 200 OK\r\n\r\n" +
                   '<img src="http://www.cafe.se/wp-content/uploads/2017/02/salt-bae.gif">' +
                   "</body></html>" +
                   "\r\n"
-                  
+
 usage_response = "HTTP/1.1 200 OK\r\n\r\n" +
                   "<html><body><h1></h1>" +
                   '<h1> USO INCORRECTO</h1>' +
