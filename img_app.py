@@ -24,14 +24,18 @@ mySocket.listen(5)
 
 # Accept connections, read incoming data, and answer back an HTML page
 #  (in an infinite loop)
-
-while True:
-    print('Waiting for connections')
-    (recvSocket, address) = mySocket.accept()
-    print('HTTP request received:')
-    print(recvSocket.recv(1024))
-    recvSocket.send(bytes("HTTP/1.1 200 OK\r\n\r\n" +
-                    "<html><body><h1>Hello World!</h1></body></html>" +
-                    "\r\n", 'utf-8'))
-    recvSocket.close()
-
+try:
+    while True:
+        print('Waiting for connections')
+        (recvSocket, address) = mySocket.accept()
+        print('HTTP request received:')
+        print(recvSocket.recv(1024))
+        recvSocket.send("HTTP/1.1 200 OK\r\n\r\n" +
+                        "<html><body><h1>IMG APP</h1>" +
+                        '<img src="http://www.cafe.se/wp-content/uploads/2017/02/salt-bae.gif">' +
+                        "</body></html>" +
+                        "\r\n")
+        recvSocket.close()
+except KeyboardInterrupt:
+    print "Closing binded socket"
+    mySocket.close()
