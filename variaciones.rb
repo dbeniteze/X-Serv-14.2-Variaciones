@@ -1,12 +1,9 @@
 require 'socket' # Provides TCPServer and TCPSocket classes
 
 server = TCPServer.new(Socket.gethostname, 2345)
-pagina_menu = true
-
 loop do
 
   socket = server.accept
-
   # la primera linea
   request = socket.gets
   opcion = request.split("/")[1].split(" ")[0].to_i
@@ -21,10 +18,11 @@ loop do
                     "<p> 4- Menu</p>" +
                     "</body></html>" +
                     "\r\n"
+
  gsyc_response = "HTTP/1.1 200 OK\r\n\r\n" +
                   "<html><body><h1>GSYC APP</h1>" +
                   "<p>" +
-                  "<a href=" + "https://gsyc.urjc.es" + "> Pagina del GSYC </a>" +
+                  '<a href="https://gsyc.urjc.es"> Pagina del GSYC </a>' +
                   "</p>" + "</body></html>" +
                   "\r\n"
 
@@ -33,11 +31,13 @@ error_response = "HTTP/1.1 404 NOT FOUND\r\n\r\n" +
                  "<h2> PAGE NOT FOUND </H2>" +
                  "</body></html>" +
                  "\r\n"
+
 img_response = "HTTP/1.1 200 OK\r\n\r\n" +
                   "<html><body><h1>IMG APP</h1>" +
                   '<img src="http://www.cafe.se/wp-content/uploads/2017/02/salt-bae.gif">' +
                   "</body></html>" +
                   "\r\n"
+                  
 usage_response = "HTTP/1.1 200 OK\r\n\r\n" +
                   "<html><body><h1></h1>" +
                   '<h1> USO INCORRECTO</h1>' +
@@ -45,18 +45,14 @@ usage_response = "HTTP/1.1 200 OK\r\n\r\n" +
                   "</body></html>" +
                   "\r\n"
 
-  # Print the actual response body
-  socket.print response if pagina_menu
-  unless pagina_menu then
-     case opcion
-     when 1 then socket.print gsyc_response
-     when 2 then socket.print error_response
-     when 3 then socket.print img_response
-     when 4 then socket.print response
-     else socket.print response
-     end
-  end
-  pagina_menu = false
+case opcion
+   when 1 then socket.print gsyc_response
+   when 2 then socket.print error_response
+   when 3 then socket.print img_response
+   when 4 then socket.print response
+   else socket.print response
+end
+
   # Close the socket, terminating the connection
   socket.close
 end

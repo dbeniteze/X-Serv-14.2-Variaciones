@@ -33,7 +33,7 @@ while True:
     recvSocket.send("HTTP/1.1 200 OK\r\n\r\n" +
                     "<html><body><h1>GSYC APP</h1>" +
                     "<p>" +
-                    "<a href=" + "https://gsyc.urjc.es" + "> Pagina del GSYC </a>" +
+                    '<a href="https://gsyc.urjc.es"> Pagina del GSYC </a>' +
                     "</p>" + "</body></html>" +
                     "\r\n")
     recvSocket.close()
